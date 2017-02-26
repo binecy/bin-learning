@@ -1,0 +1,18 @@
+apply plugin: 'java'
+
+// 所有子模块的通用配置
+subprojects { 
+    apply plugin: 'java'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile(  
+            "junit:junit:4.11"  
+        ) 
+    }
+
+}

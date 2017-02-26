@@ -1,0 +1,18 @@
+
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.5.1.RELEASE'
+    }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.1.RELEASE")
+}
+
+
+apply plugin: 'spring-boot'
