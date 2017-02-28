@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  ">
+
+    <!-- 数据源，使用dbcp -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/mybatisd" />
+        <property name="username" value="root" />
+        <property name="password" value="bin" />
+    </bean>
+
+    <!-- sqlSessionFactory -->
+    <bean id = "sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- mapper文件 -->
+        <property name="mapperLocations" value="classpath:com/mybatis/start/mapper/*.xml"/>
+    </bean>
+
+    <!-- 扫描包 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mybatis.start.mapper" />
+    </bean>
+
+    <bean class="com.mybatis.start.service.BlogService" id="blogService">
+        <property name="blogMapper" ref="blogMapper" />
+    </bean>
+</beans>

@@ -1,2 +1,2 @@
-include 'core','springboot-start','dubbo-start','netty-start'
+include 'core','springboot-start','dubbo-start','netty-start','mybatis-start'
 
