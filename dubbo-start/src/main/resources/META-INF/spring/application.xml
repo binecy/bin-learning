@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="base-service"  />
+    <!-- 用dubbo协议在29115端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="29115" />
+
+    <!-- 使用tomcat开放rest接口 -->
+    <dubbo:protocol name="rest" port="8888" threads="500" contextpath="services" server="tomcat" accepts="500"/>
+
+    <!-- 定义接口实现类 -->
+    <bean id="helloService" class="com.dubbo.start.service.HelloServiceImpl"></bean>
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="com.dubbo.start.service.HelloService" ref="helloService" timeout="6000"  registry="N/A" protocol="dubbo"/>
+
+    <bean id="echoService" class="com.dubbo.start.service.EchoServiceImpl"></bean>
+    <dubbo:service interface="com.dubbo.start.service.EchoService" ref="echoService"  protocol="rest" registry="N/A"/>
+</beans>

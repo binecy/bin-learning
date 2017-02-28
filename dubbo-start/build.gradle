@@ -1,0 +1,10 @@
+dependencies {
+    compile(
+            "com.alibaba:dubbo:2.8.4",
+            "org.jboss.resteasy:resteasy-jaxrs:3.0.7.Final",
+            "org.jboss.resteasy:resteasy-client:3.0.7.Final",
+            "org.apache.tomcat.embed:tomcat-embed-core:8.0.11",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.11",
+            "javax.validation:validation-api:1.0.0.GA"
+    )
+}

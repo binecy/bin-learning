@@ -7,7 +7,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
 /**
- * Created by bin.liang on 2017/2/28.
+ * Created by bin on 2017/2/28.
  */
 public class Handler implements Runnable {
     private static final int MAXIN = 1024;
