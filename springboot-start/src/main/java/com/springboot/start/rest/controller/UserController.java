@@ -1,7 +1,7 @@
-package rest.controller;
+package com.springboot.start.rest.controller;
 
 import org.springframework.web.bind.annotation.*;
-import rest.domain.User;
+import com.springboot.start.rest.domain.User;
 
 import java.util.*;
 

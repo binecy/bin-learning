@@ -1,4 +1,4 @@
-package rest.domain;
+package com.springboot.start.rest.domain;
 
 /**
  * Created by bin on 2017/2/26.
