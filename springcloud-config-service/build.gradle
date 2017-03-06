@@ -13,7 +13,8 @@ dependencies {
     compile(
             "org.springframework.boot:spring-boot-starter-web:1.5.1.RELEASE",
             "org.springframework.cloud:spring-cloud-starter-config:1.2.2.RELEASE",
-            "org.springframework.boot:spring-boot-starter-actuator:1.4.5.RELEASE"
+            "org.springframework.boot:spring-boot-starter-actuator:1.4.5.RELEASE",
+            "org.springframework.cloud:spring-cloud-starter-bus-kafka:1.1.0.RELEASE"
 
     )
     testCompile(

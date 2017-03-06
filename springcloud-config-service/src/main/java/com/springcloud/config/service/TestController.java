@@ -22,4 +22,5 @@ class TestController {
 
 
     //  curl -d "" http://localhost:7002/refresh  刷新配置
+    // kafka  curl -X POST -d "" http://localhost:7002/bus/refresh 刷新配置
 }
