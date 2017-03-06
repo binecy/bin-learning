@@ -1,4 +1,4 @@
 include 'core','springboot-start','dubbo-start','netty-start','mybatis-start','springboot-redis','springboot-mybatis',
         'springboot-kafka','springcloud-eureka','springcloud-ribbon','springcloud-eureka-server','springcloud-feign',
-        'springcloud-zuul'
+        'springcloud-zuul','springcloud-config','springcloud-config-service'
 
