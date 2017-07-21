@@ -1,0 +1,23 @@
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+}
+
+dependencies {
+    compile(
+            "org.springframework:spring-core:4.3.9.RELEASE",
+            "org.springframework:spring-beans:4.3.9.RELEASE",
+            "org.springframework:spring-context-support:4.3.9.RELEASE",
+            "org.springframework:spring-aop:4.3.9.RELEASE",
+            "org.aspectj:aspectjweaver:1.8.10"
+
+    )
+    
+}
+
+
+

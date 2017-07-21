@@ -1,0 +1,24 @@
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+}
+
+dependencies {
+    compile(
+            "redis.clients:jedis:2.9.0",
+            "com.baidu.disconf:disconf-client:2.6.35",
+            "org.springframework:spring-core:4.3.9.RELEASE",
+            "org.springframework:spring-beans:4.3.9.RELEASE",
+            "org.springframework:spring-context-support:4.3.9.RELEASE",
+            "org.springframework:spring-aop:4.3.9.RELEASE",
+            "org.aspectj:aspectjweaver:1.8.10"
+    )
+    
+}
+
+
+
