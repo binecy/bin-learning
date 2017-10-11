@@ -1,6 +1,6 @@
 dependencies {
     compile(
-            "com.alibaba:dubbo:2.8.4",
+            "com.alibaba:dubbo:2.5.5",
             "org.jboss.resteasy:resteasy-jaxrs:3.0.7.Final",
             "org.jboss.resteasy:resteasy-client:3.0.7.Final",
             "org.apache.tomcat.embed:tomcat-embed-core:8.0.11",

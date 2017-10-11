@@ -51,3 +51,6 @@ gradlew.batgradlew
 gradlew.bat
 
 **/build
+
+
+out/
