@@ -1,0 +1,19 @@
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+}
+
+dependencies {
+    compile(
+            "org.redisson:redisson:3.5.4",
+            "org.apache.zookeeper:zookeeper:3.4.10"
+    )
+    
+}
+
+
+
