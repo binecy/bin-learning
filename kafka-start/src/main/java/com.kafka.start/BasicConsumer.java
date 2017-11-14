@@ -13,24 +13,21 @@ import java.util.Properties;
 public class BasicConsumer {
     public void get() {
         Properties props = new Properties();
-//        props.put("bootstrap.servers", "54.70.215.146:9092");
-        props.put("bootstrap.servers", "127.0.0.1:9092");
-        props.put("group.id", "test");
-//        props.put("zookeeper.connect","54.70.215.146:2181");
-        props.put("enable.auto.commit", "true");
-        props.put("auto.commit.interval.ms", "1000");
-        props.put("session.timeout.ms", "30000");
+        props.put("bootstrap.servers", "35.165.169.235:9092");
+        props.put("group.id", "test");      // 配置用户group
+        props.put("enable.auto.commit", "true");    // 是否自动提交用户offset
+        props.put("auto.commit.interval.ms", "1000");   //用户offset自动提交的频率
+        props.put("session.timeout.ms", "30000");   // broker超时时间, 如果broker在该时间内没有回应心跳将被remove
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
 
-        consumer.subscribe(Arrays.asList("my-topic"));
+        consumer.subscribe(Arrays.asList("test"));
         while (true) {
-//            System.out.println("....");
-            ConsumerRecords<String, String> records = consumer.poll(100);
+            ConsumerRecords<String, String> records = consumer.poll(1000);
             if(!records.isEmpty()) {
                 for (ConsumerRecord<String, String> record : records)
-                    System.out.printf("offset = %d, key = %s, value = %s;", record.offset(), record.key(), record.value());
+                    System.out.printf("offset = %d, key = %s, value = %s\n", record.offset(), record.key(), record.value());
             }
         }
     }

@@ -10,10 +10,12 @@ public class DateTest {
 
     @Test
     public void testFormat() {
+        // 当前时间
         LocalDate now = LocalDate.now();
-
+        // 当前时间加一天， 并按常用格式yyyy-MM-dd格式化
         System.out.println(now.plusDays(1).format(DateTimeFormatter.BASIC_ISO_DATE));
         System.out.println(now.plusDays(1).format(DateTimeFormatter.ISO_DATE));
+        // 当前时间减一天, 并按指定格式格式化
         System.out.println(now.minusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
         LocalTime time = LocalTime.now();
@@ -26,7 +28,9 @@ public class DateTest {
     @Test
     public void testCompare() {
         LocalDate now = LocalDate.now();
+        // 字符串转时间
         LocalDate date = LocalDate.parse("2019-01-26", DateTimeFormatter.ISO_DATE);
+        // 时间比较
         System.out.println(now.isAfter(date));
 
 
@@ -37,8 +41,10 @@ public class DateTest {
 
     @Test
     public void testConvert() {
-        // 时区ZoneId
+        // 时区ZoneId LocalDate时区不相关, Date时区, 两者转化需使用ZoneId
         ZoneId zoneId = ZoneId.systemDefault();
+
+
         LocalDate localDate = LocalDate.now();
         // localDate转ZonedDateTime
         ZonedDateTime zdt = localDate.atStartOfDay(zoneId);
@@ -49,10 +55,12 @@ public class DateTest {
 
 
         Date nowDate = new Date();
-        // Instant:用long表示从1970-1-1 00:00:00到现在的nanosecond
+        // Instant:nanosecond表示的时间戳
         Instant instant = nowDate.toInstant();
-
-        LocalDate nowLocalDate = instant.atZone(zoneId).toLocalDate();
+        // instant转ZonedDateTime
+        ZonedDateTime nowZonedDate = instant.atZone(zoneId);
+        // ZonedDateTime转LocalDate
+        LocalDate nowLocalDate = nowZonedDate.toLocalDate();
         System.out.println(nowLocalDate.format(DateTimeFormatter.ISO_DATE));
     }
 }
