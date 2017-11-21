@@ -13,19 +13,24 @@ public class BasicProducer {
 
     private void send(){
         Properties props = new Properties();
-        props.put("bootstrap.servers", "35.165.169.235:9092");
-        // 0:如果设置为零，则生产者不会等待来自服务器的任何确认。
+        props.put("bootstrap.servers", "aws.binecy.com:9092");
+        // Producer接受broker ack的模式
+        // 0: 如果设置为零，则生产者不会等待来自服务器的任何确认。
         // 1: leader接收成功并写入本地日志就返回ack   如果leader在接收记录之后但在追随者复制之前立即崩溃，那么记录将会丢失。
         // all:这意味着领导者将等待全套的in-sync副本确认记录。
         props.put("acks", "all");
         props.put("retries", 0);    // 失败重发次数
-        // 只要有多个记录被发送到同一个分区，生产者就会尝试将记录批量提交。
+        // 批量发送记录的最大值
+
+        // 如果有多个记录被发送到同一个分区，生产者就会尝试将记录批量提交。
         // batch.size配置默认的批量大小, 单位字节。 kafka不会发送大于此大小的批量记录。
         // 过小可能降低吞吐量， 过大可能会更浪费一点的内存
         props.put("batch.size", 16384); //
-        // 生产者可用于缓冲等待发送记录的总字节数  buffer.memory配置缓存最大字节
+
+
+        // Producer可用于缓冲等待发送记录的最大字节数
         props.put("buffer.memory", 33554432);
-        // 如果缓冲区已满或metadata不可用Producer将阻塞  max.block.ms配置可阻塞多长时间，之后它将抛出一个异常
+        // 如果缓冲区已满或metadata不可用Producer将阻塞  max.block.ms配置可阻塞的多长时间，超时它将抛出一个异常
         props.put("max.block.ms", 60000);
 
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");

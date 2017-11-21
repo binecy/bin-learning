@@ -3,6 +3,7 @@ package java8;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SteamTest {
@@ -29,7 +30,9 @@ public class SteamTest {
         }
 
 
+
         // 注意: Collectors.toMap方法,如果key有重复,会抛出异常
+        // list.add(1);
         Map<String, Integer> map = list.stream().collect(Collectors.toMap(c -> c.toString(), c -> c));
         map.forEach((k, v) -> System.out.println("k : " + k + " , v : " + v));
 
@@ -42,6 +45,9 @@ public class SteamTest {
         listMap.forEach(l -> l.forEach((k, v) -> System.out.println("k : " + k + " , v : " + v)));
 
         Comparator<Integer> c = (t1, t2) ->  Integer.compare(t1, t2);
+//        Comparator<Integer> c = Integer::compare;
+
+
         Arrays.sort(new Integer[]{2,8,3,5,8}, c);
     }
 
@@ -86,7 +92,7 @@ public class SteamTest {
 
 
         //原始类型stream
-        //IntStream.of(new int[]{1, 2, 3, 4});
+//        IntStream.of(new int[]{1, 2, 3, 4});
 
 
 

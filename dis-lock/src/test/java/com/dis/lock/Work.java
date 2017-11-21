@@ -2,8 +2,6 @@ package com.dis.lock;
 
 
 public class Work implements Runnable{
-
-
     private DisLock lock;
     private String name;
     public Work(DisLock lock) {

@@ -19,13 +19,13 @@ public class ZkLock implements DisLock{
         this.zk = zk;
         this.lockPath = lockPath;
 
-
+        // 创建加锁的路径
         if(zk.exists(lockPath, false) == null) {
             try {
                 zk.create(lockPath, "0".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             } catch (KeeperException ke) {
                 if(ke.code() == KeeperException.Code.NODEEXISTS) {
-                    System.out.println("node is exists");
+//                    System.out.println("node is exists");
                 } else {
                     throw  ke;
                 }
@@ -46,24 +46,29 @@ public class ZkLock implements DisLock{
 
             return acquireLock(lockNode, timeSecond, null);
         } catch (KeeperException e) {
-            e.printStackTrace();
-
             if(path != null) {
                 try {
                     zk.delete(path, -1);
                 } catch (KeeperException e1) {
                 }
             }
-        }
 
-        return false;
+            throw new RuntimeException("try lock fail", e);
+        }
     }
 
-    private boolean acquireLock(String lockNode, int timeSecond, CountDownLatch existLatch) throws InterruptedException, KeeperException {
-        // 获取所以的子节点,就是所以的加锁节点
-        List<String> allLock = null;
-
-            allLock = zk.getChildren(lockPath, false);
+    /**
+     * 申请加锁
+     * @param lockNode
+     * @param timeSecond
+     * @param existLatch
+     * @return
+     * @throws InterruptedException
+     * @throws KeeperException
+     */
+    private boolean acquireLock(String lockNode, int timeSecond, CountDownLatch existLatch) throws KeeperException, InterruptedException {
+        // 获取所有的子节点,就是所有的已加锁节点
+        List<String> allLock = zk.getChildren(lockPath, false);
 
         // 排序
         Collections.sort(allLock);
@@ -74,11 +79,11 @@ public class ZkLock implements DisLock{
         if(lockIndex < 0) {
             // 出错了
             return false;
-        } else if(lockIndex == 0) {     // 当前请求锁节点在第一位, 加锁成功
+        } else if(lockIndex == 0) {     // 当前请求锁节点编号最小, 加锁成功
 
             lockedNode = lockNode;
             return true;
-        } else {    // 当前请求锁节点不在第一位
+        } else {    // 当前请求锁节点编号不是最小
             if(timeSecond <= 0) {
                 return false;
             }
@@ -87,7 +92,7 @@ public class ZkLock implements DisLock{
             String preLock = allLock.get(lockIndex - 1);
 
             // CountDownLatch用于阻塞当前线程, 以等待锁
-            // 第一次监听时,要创建CountDownLatch, 再次监听时, 会传递CountDownLatch参数
+            // 第一次申请加锁时,要创建CountDownLatch, 再次监听时, 不再创建新的CountDownLatch
             CountDownLatch newLatch = null;
             if(existLatch == null) {
                 newLatch = new CountDownLatch(1);
@@ -97,37 +102,36 @@ public class ZkLock implements DisLock{
             // 监听前一个节点, 如果前一个节点发生变化(如删除), 当前节点重新获取锁
             watchPath(lockPath + "/" + preLock, lockNode, timeSecond, existLatch);
 
-
+            // 第一次申请加锁时,要阻塞当前线程
             return newLatch == null ? false : newLatch.await(timeSecond, TimeUnit.SECONDS);
         }
     }
 
     private void watchPath(String path, String lockNode, int time, CountDownLatch latch) throws InterruptedException, KeeperException {
 
-            zk.exists(path, new Watcher() {
-                public void process(WatchedEvent event) {
-                    try {
-                        // 获取锁成功
-                        if(acquireLock(lockNode, time, latch)) {
-                            // 继续进行线程
-                            latch.countDown();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        zk.exists(path, new Watcher() {
+            public void process(WatchedEvent event) {
+                // 重新申请加锁
+                try {
+                    if(acquireLock(lockNode, time, latch)) {
+                        // 继续进行线程
+                        latch.countDown();
                     }
+                } catch (Exception e) {
+                    throw new RuntimeException("try lock fail", e);
                 }
-            });
+            }
+        });
 
     }
 
     @Override
     public void unLock() {
         try {
+            // 删除节点
             zk.delete(lockPath + "/" + lockedNode, -1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (KeeperException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw  new RuntimeException("delete fail : " + lockPath + "/" + lockedNode, e);
         }
     }
 }

@@ -14,13 +14,9 @@ public class RedissonLock implements DisLock {
         this.lock = lock;
     }
 
-
     @Override
     public boolean tryLock(int timeSecond) throws InterruptedException {
-
-            return lock.tryLock(timeSecond, TimeUnit.SECONDS);
-
-
+        return lock.tryLock(timeSecond, TimeUnit.SECONDS);
     }
 
     @Override

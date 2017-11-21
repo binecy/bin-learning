@@ -10,7 +10,7 @@ public class Base64Test {
     @Test
     public void test() {
         Base64.Encoder encoder = Base64.getEncoder();
-        String original = "bin" + ":" + "1991";
+        String original = "bin" + ":" + "9108";
         String encoded = encoder.encodeToString(original.getBytes(StandardCharsets.UTF_8));
 
         System.out.println(encoded);
