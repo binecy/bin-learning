@@ -1,0 +1,47 @@
+@startuml
+
+/'abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}'/
+
+
+interface Channel
+Channel <|- AbstractChannel
+
+abstract class AbstractChannel
+abstract class AbstractNioChannel
+
+AbstractChannel <|- AbstractNioChannel
+
+
+abstract class  AbstractNioMessageChannel
+AbstractNioChannel <|-- AbstractNioMessageChannel
+
+class NioServerSocketChannel
+AbstractNioMessageChannel <|-- NioServerSocketChannel
+
+abstract class AbstractNioByteChannel
+AbstractNioChannel <|- AbstractNioByteChannel
+
+class NioSocketChannel
+AbstractNioByteChannel <|- NioSocketChannel
+@enduml

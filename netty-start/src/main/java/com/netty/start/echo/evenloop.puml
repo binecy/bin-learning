@@ -1,0 +1,62 @@
+@startuml
+
+
+/'
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|-- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+'/
+
+
+interface EventLoopGroup
+interface EventLoop
+
+EventLoopGroup <|- EventLoop
+abstract class  SingleThreadEventLoop
+
+EventLoop <|-  SingleThreadEventLoop
+
+class NioEventLoop
+SingleThreadEventLoop <|- NioEventLoop
+
+
+/' Executor '/
+interface EventExecutorGroup
+EventExecutorGroup <|-- EventLoopGroup
+
+
+interface ScheduledExecutorService
+ScheduledExecutorService <|-- EventExecutorGroup
+
+
+interface EventExecutor
+EventExecutor <|-- EventLoop
+
+
+
+
+interface EventExecutorGroup
+EventExecutorGroup <|- EventExecutor
+
+interface Executor
+Executor <|- ThreadPerTaskExecutor
+@enduml

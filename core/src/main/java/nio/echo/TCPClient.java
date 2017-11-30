@@ -9,51 +9,51 @@ import java.nio.channels.SocketChannel;
  * Created by bin on 2017/2/28.
  */
 public class TCPClient {
-    public static void main(String args[]) throws Exception {
+    public static void main(String args[]) throws Exception{
         String server = "127.0.0.1";
         int serverPort = 8881;
         byte[] sendBytes = "hello".getBytes();
 
-        //´´½¨Ò»¸öĞÅµÀ£¬²¢ÉèÎª·Ç×èÈûÄ£Ê½
+        //åˆ›å»ºä¸€ä¸ªä¿¡é“ï¼Œå¹¶è®¾ä¸ºéé˜»å¡æ¨¡å¼
         SocketChannel clientChannel = SocketChannel.open();
         clientChannel.configureBlocking(false);
-        //Ïò·şÎñ¶Ë·¢ÆğÁ¬½Ó
-        if (!clientChannel.connect(new InetSocketAddress(server, serverPort))) {
-            //²»¶ÏµØÂÖÑ¯Á¬½Ó×´Ì¬£¬Ö±µ½Íê³ÉÁ¬½Ó
-            while (!clientChannel.finishConnect()) {
-                //ÔÚµÈ´ıÁ¬½ÓµÄÊ±¼äÀï£¬¿ÉÒÔÖ´ĞĞÆäËûÈÎÎñ£¬ÒÔ³ä·Ö·¢»Ó·Ç×èÈûIOµÄÒì²½ÌØĞÔ
-                //ÕâÀïÎªÁËÑİÊ¾¸Ã·½·¨µÄÊ¹ÓÃ£¬Ö»ÊÇÒ»Ö±´òÓ¡"."
+        //å‘æœåŠ¡ç«¯å‘èµ·è¿æ¥
+        if (!clientChannel.connect(new InetSocketAddress(server, serverPort))){
+            //ä¸æ–­åœ°è½®è¯¢è¿æ¥çŠ¶æ€ï¼Œç›´åˆ°å®Œæˆè¿æ¥
+            while (!clientChannel.finishConnect()){
+                //åœ¨ç­‰å¾…è¿æ¥çš„æ—¶é—´é‡Œï¼Œå¯ä»¥æ‰§è¡Œå…¶ä»–ä»»åŠ¡ï¼Œä»¥å……åˆ†å‘æŒ¥éé˜»å¡IOçš„å¼‚æ­¥ç‰¹æ€§
+                //è¿™é‡Œä¸ºäº†æ¼”ç¤ºè¯¥æ–¹æ³•çš„ä½¿ç”¨ï¼Œåªæ˜¯ä¸€ç›´æ‰“å°"."
                 System.out.print(".");
             }
         }
-        //ÎªÁËÓëºóÃæ´òÓ¡µÄ"."Çø±ğ¿ªÀ´£¬ÕâÀïÊä³ö»»ĞĞ·û
+        //ä¸ºäº†ä¸åé¢æ‰“å°çš„"."åŒºåˆ«å¼€æ¥ï¼Œè¿™é‡Œè¾“å‡ºæ¢è¡Œç¬¦
         System.out.print("\n");
-        //·Ö±ğÊµÀı»¯ÓÃÀ´¶ÁĞ´µÄ»º³åÇø
+        //åˆ†åˆ«å®ä¾‹åŒ–ç”¨æ¥è¯»å†™çš„ç¼“å†²åŒº
         ByteBuffer writeBuf = ByteBuffer.wrap(sendBytes);
         ByteBuffer readBuf = ByteBuffer.allocate(sendBytes.length);
-        //½ÓÊÕµ½µÄ×ÜµÄ×Ö½ÚÊı
+        //æ¥æ”¶åˆ°çš„æ€»çš„å­—èŠ‚æ•°
         int totalBytesReceived = 0;
-        //Ã¿Ò»´Îµ÷ÓÃread£¨£©·½·¨½ÓÊÕµ½µÄ×Ö½ÚÊı
+        //æ¯ä¸€æ¬¡è°ƒç”¨readï¼ˆï¼‰æ–¹æ³•æ¥æ”¶åˆ°çš„å­—èŠ‚æ•°
         int bytesReceived;
-        //Ñ­»·Ö´ĞĞ£¬Ö±µ½½ÓÊÕµ½µÄ×Ö½ÚÊıÓë·¢ËÍµÄ×Ö·û´®µÄ×Ö½ÚÊıÏàµÈ
-        while (totalBytesReceived < sendBytes.length) {
-            //Èç¹ûÓÃÀ´ÏòÍ¨µÀÖĞĞ´Êı¾İµÄ»º³åÇøÖĞ»¹ÓĞÊ£ÓàµÄ×Ö½Ú£¬Ôò¼ÌĞø½«Êı¾İĞ´ÈëĞÅµÀ
-            if (writeBuf.hasRemaining()) {
+        //å¾ªç¯æ‰§è¡Œï¼Œç›´åˆ°æ¥æ”¶åˆ°çš„å­—èŠ‚æ•°ä¸å‘é€çš„å­—ç¬¦ä¸²çš„å­—èŠ‚æ•°ç›¸ç­‰
+        while (totalBytesReceived < sendBytes.length){
+            //å¦‚æœç”¨æ¥å‘é€šé“ä¸­å†™æ•°æ®çš„ç¼“å†²åŒºä¸­è¿˜æœ‰å‰©ä½™çš„å­—èŠ‚ï¼Œåˆ™ç»§ç»­å°†æ•°æ®å†™å…¥ä¿¡é“
+            if (writeBuf.hasRemaining()){
                 clientChannel.write(writeBuf);
             }
-            //Èç¹ûread£¨£©½ÓÊÕµ½-1£¬±íÃ÷·şÎñ¶Ë¹Ø±Õ£¬Å×³öÒì³£
-            if ((bytesReceived = clientChannel.read(readBuf)) == -1) {
+            //å¦‚æœreadï¼ˆï¼‰æ¥æ”¶åˆ°-1ï¼Œè¡¨æ˜æœåŠ¡ç«¯å…³é—­ï¼ŒæŠ›å‡ºå¼‚å¸¸
+            if ((bytesReceived = clientChannel.read(readBuf)) == -1){
                 throw new SocketException("Connection closed prematurely");
             }
-            //¼ÆËã½ÓÊÕµ½µÄ×Ü×Ö½ÚÊı
+            //è®¡ç®—æ¥æ”¶åˆ°çš„æ€»å­—èŠ‚æ•°
             totalBytesReceived += bytesReceived;
-            //ÔÚµÈ´ıÍ¨ĞÅÍê³ÉµÄ¹ı³ÌÖĞ£¬³ÌĞò¿ÉÒÔÖ´ĞĞÆäËûÈÎÎñ£¬ÒÔÌåÏÖ·Ç×èÈûIOµÄÒì²½ÌØĞÔ
-            //ÕâÀïÎªÁËÑİÊ¾¸Ã·½·¨µÄÊ¹ÓÃ£¬Í¬ÑùÖ»ÊÇÒ»Ö±´òÓ¡"."
+            //åœ¨ç­‰å¾…é€šä¿¡å®Œæˆçš„è¿‡ç¨‹ä¸­ï¼Œç¨‹åºå¯ä»¥æ‰§è¡Œå…¶ä»–ä»»åŠ¡ï¼Œä»¥ä½“ç°éé˜»å¡IOçš„å¼‚æ­¥ç‰¹æ€§
+            //è¿™é‡Œä¸ºäº†æ¼”ç¤ºè¯¥æ–¹æ³•çš„ä½¿ç”¨ï¼ŒåŒæ ·åªæ˜¯ä¸€ç›´æ‰“å°"."
             System.out.print(".");
         }
-        //´òÓ¡³ö½ÓÊÕµ½µÄÊı¾İ
-        System.out.println("Received: " + new String(readBuf.array(), 0, totalBytesReceived));
-        //¹Ø±ÕĞÅµÀ
+        //æ‰“å°å‡ºæ¥æ”¶åˆ°çš„æ•°æ®
+        System.out.println("Received: " +  new String(readBuf.array(), 0, totalBytesReceived));
+        //å…³é—­ä¿¡é“
         clientChannel.close();
     }
 }

@@ -1,4 +1,4 @@
-package com.netty.start.echo;
+package com.netty.start.strsplit;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -8,10 +8,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-/**
- * Created by bin on 2017/2/28.
- */
-public class EchoServer {
+public class Server {
     static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
 
     public static void main(String[] args) throws Exception {
@@ -31,8 +28,11 @@ public class EchoServer {
                         public void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline p = ch.pipeline();
 
-                            p.addLast(new LoggingHandler(LogLevel.INFO));
-                            p.addLast(new EchoServerHandler());
+                            p.addLast(new MergeHandler());
+
+                            p.addLast(new SplitHandler());
+                            p.addLast(new ResponseHandler());
+
                         }
                     });
 

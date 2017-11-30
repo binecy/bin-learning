@@ -7,13 +7,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Created by bin on 2017/2/28.
  */
 public class DubboClient {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ClassPathXmlApplicationContext ctx = new
                 ClassPathXmlApplicationContext(new String[]{"classpath:dubbo-client.xml"});
         ctx.start();
 
         HelloService service = (HelloService) ctx.getBean("helloService");
 
-        System.out.println(service.hello("bin"));
+        while (true) {
+            System.out.println(service.hello("bin"));
+            Thread.sleep(1000 * 3);
+        }
+
     }
 }

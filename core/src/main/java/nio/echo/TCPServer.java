@@ -11,54 +11,54 @@ import java.util.Iterator;
  * Created by bin on 2017/2/28.
  */
 public class TCPServer {
-    //»º³åÇøµÄ³¤¶È
+    //ç¼“å†²åŒºçš„é•¿åº¦
     private static final int BUF_SIZE = 256;
-    //select·½·¨µÈ´ıĞÅµÀ×¼±¸ºÃµÄ×î³¤Ê±¼ä
+    //selectæ–¹æ³•ç­‰å¾…ä¿¡é“å‡†å¤‡å¥½çš„æœ€é•¿æ—¶é—´
     private static final int TIMEOUT = 3000;
 
     public static void main(String[] args) throws IOException {
 
-        //´´½¨Ò»¸öÑ¡ÔñÆ÷
+        //åˆ›å»ºä¸€ä¸ªé€‰æ‹©å™¨
         Selector selector = Selector.open();
 
-        //ÊµÀı»¯Ò»¸öĞÅµÀ
+        //å®ä¾‹åŒ–ä¸€ä¸ªä¿¡é“
         ServerSocketChannel listenChannel = ServerSocketChannel.open();
-        //½«¸ÃĞÅµÀ°ó¶¨µ½Ö¸¶¨¶Ë¿Ú
+        //å°†è¯¥ä¿¡é“ç»‘å®šåˆ°æŒ‡å®šç«¯å£
         listenChannel.socket().bind(new InetSocketAddress(8881));
-        //ÅäÖÃĞÅµÀÎª·Ç×èÈûÄ£Ê½
+        //é…ç½®ä¿¡é“ä¸ºéé˜»å¡æ¨¡å¼
         listenChannel.configureBlocking(false);
-        //½«Ñ¡ÔñÆ÷×¢²áµ½¸÷¸öĞÅµÀ
+        //å°†é€‰æ‹©å™¨æ³¨å†Œåˆ°å„ä¸ªä¿¡é“
         listenChannel.register(selector, SelectionKey.OP_ACCEPT);
 
-        //´´½¨Ò»¸öÊµÏÖÁËĞ­Òé½Ó¿ÚµÄ¶ÔÏó
+        //åˆ›å»ºä¸€ä¸ªå®ç°äº†åè®®æ¥å£çš„å¯¹è±¡
         EchoProtocol protocol = new EchoProtocol(BUF_SIZE);
-        //²»¶ÏÂÖÑ¯select·½·¨£¬»ñÈ¡×¼±¸ºÃµÄĞÅµÀËù¹ØÁªµÄKey¼¯
-        while (true) {
-            //Ò»Ö±µÈ´ı,Ö±ÖÁÓĞĞÅµÀ×¼±¸ºÃÁËI/O²Ù×÷
-            if (selector.select(TIMEOUT) == 0) {
-                //ÔÚµÈ´ıĞÅµÀ×¼±¸µÄÍ¬Ê±£¬Ò²¿ÉÒÔÒì²½µØÖ´ĞĞÆäËûÈÎÎñ£¬
-                //ÕâÀïÖ»ÊÇ¼òµ¥µØ´òÓ¡"."
+        //ä¸æ–­è½®è¯¢selectæ–¹æ³•ï¼Œè·å–å‡†å¤‡å¥½çš„ä¿¡é“æ‰€å…³è”çš„Keyé›†
+        while (true){
+            //ä¸€ç›´ç­‰å¾…,ç›´è‡³æœ‰ä¿¡é“å‡†å¤‡å¥½äº†I/Oæ“ä½œ
+            if (selector.select(TIMEOUT) == 0){
+                //åœ¨ç­‰å¾…ä¿¡é“å‡†å¤‡çš„åŒæ—¶ï¼Œä¹Ÿå¯ä»¥å¼‚æ­¥åœ°æ‰§è¡Œå…¶ä»–ä»»åŠ¡ï¼Œ
+                //è¿™é‡Œåªæ˜¯ç®€å•åœ°æ‰“å°"."
                 System.out.print(".");
                 continue;
             }
-            //»ñÈ¡×¼±¸ºÃµÄĞÅµÀËù¹ØÁªµÄKey¼¯ºÏµÄiteratorÊµÀı
+            //è·å–å‡†å¤‡å¥½çš„ä¿¡é“æ‰€å…³è”çš„Keyé›†åˆçš„iteratorå®ä¾‹
             Iterator<SelectionKey> keyIter = selector.selectedKeys().iterator();
-            //Ñ­»·È¡µÃ¼¯ºÏÖĞµÄÃ¿¸ö¼üÖµ
-            while (keyIter.hasNext()) {
+            //å¾ªç¯å–å¾—é›†åˆä¸­çš„æ¯ä¸ªé”®å€¼
+            while (keyIter.hasNext()){
                 SelectionKey key = keyIter.next();
-                //Èç¹û·şÎñ¶ËĞÅµÀ¸ĞĞËÈ¤µÄI/O²Ù×÷Îªaccept
-                if (key.isAcceptable()) {
+                //å¦‚æœæœåŠ¡ç«¯ä¿¡é“æ„Ÿå…´è¶£çš„I/Oæ“ä½œä¸ºaccept
+                if (key.isAcceptable()){
                     protocol.handleAccept(key);
                 }
-                //Èç¹û¿Í»§¶ËĞÅµÀ¸ĞĞËÈ¤µÄI/O²Ù×÷Îªread
-                if (key.isReadable()) {
+                //å¦‚æœå®¢æˆ·ç«¯ä¿¡é“æ„Ÿå…´è¶£çš„I/Oæ“ä½œä¸ºread
+                if (key.isReadable()){
                     protocol.handleRead(key);
                 }
-                //Èç¹û¸Ã¼üÖµÓĞĞ§£¬²¢ÇÒÆä¶ÔÓ¦µÄ¿Í»§¶ËĞÅµÀ¸ĞĞËÈ¤µÄI/O²Ù×÷Îªwrite
+                //å¦‚æœè¯¥é”®å€¼æœ‰æ•ˆï¼Œå¹¶ä¸”å…¶å¯¹åº”çš„å®¢æˆ·ç«¯ä¿¡é“æ„Ÿå…´è¶£çš„I/Oæ“ä½œä¸ºwrite
                 if (key.isValid() && key.isWritable()) {
                     protocol.handleWrite(key);
                 }
-                //ÕâÀïĞèÒªÊÖ¶¯´Ó¼ü¼¯ÖĞÒÆ³ıµ±Ç°µÄkey
+                //è¿™é‡Œéœ€è¦æ‰‹åŠ¨ä»é”®é›†ä¸­ç§»é™¤å½“å‰çš„key
                 keyIter.remove();
             }
         }

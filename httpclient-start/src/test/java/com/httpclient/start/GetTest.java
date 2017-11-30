@@ -19,14 +19,10 @@ public class GetTest {
     @Test
     public void testGet() throws IOException, InterruptedException {
 
-
-
-
-
             try (CloseableHttpClient client = HttpClients.createDefault()) {
 
                 for(int i = 0; i < 3; i++) {
-                    HttpGet get = new HttpGet("http://oy-admin.morning-star.cn/retail-admin-acc/api/stock/pageListStock?_=1510298095382");
+                    HttpGet get = new HttpGet("http://localhost:8012/");
                 HttpResponse response;
                 response = client.execute(get);
 

@@ -10,6 +10,9 @@
     <!-- 服务消费者应用名称，不要与提供者应用名称一致 -->
     <dubbo:application name="base-client" />
 
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry address="zookeeper://aws.binecy.com:2181" />
+
     <!-- 生成远程服务代理，可以和本地bean一样使用HelloService -->
-    <dubbo:reference id="helloService" interface="com.dubbo.start.service.HelloService" url="dubbo://127.0.0.1:29115"  timeout="60000" protocol="dubbo"/>
+    <dubbo:reference id="helloService" interface="com.dubbo.start.service.HelloService"   timeout="60000" protocol="dubbo"/>
 </beans>

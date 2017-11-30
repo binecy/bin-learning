@@ -2,6 +2,11 @@ package base;
 
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by bin on 2017/11/13.
  */
@@ -30,5 +35,10 @@ public class PathTest {
         System.out.println(this.getClass().getClassLoader().getResource("xml/local.xml"));
         System.out.println(this.getClass().getClassLoader().getResource("base"));
         System.out.println(this.getClass().getClassLoader().getResource("base/simple"));
+
+
     }
+
+
+
 }
