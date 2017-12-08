@@ -1,0 +1,68 @@
+@startuml
+
+/'abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}'/
+
+
+interface BeanFactory
+interface AutowireCapableBeanFactory
+BeanFactory <|-- AutowireCapableBeanFactory
+
+interface SingletonBeanRegistry
+/' 注册接口registerSingleton(String beanName, Object singletonObject) '/
+
+interface ConfigurableBeanFactory
+/' 配置BeanFactory的方法 '/
+
+SingletonBeanRegistry <|-- ConfigurableBeanFactory
+
+
+
+
+interface HierarchicalBeanFactory
+/' 有层级的BeanFactory  getParentBeanFactory '/
+BeanFactory <|-- HierarchicalBeanFactory
+HierarchicalBeanFactory <|-- ConfigurableBeanFactory
+abstract class AbstractBeanFactory
+
+ConfigurableBeanFactory <|-- AbstractBeanFactory
+
+abstract class AbstractAutowireCapableBeanFactory
+
+AutowireCapableBeanFactory <|--- AbstractAutowireCapableBeanFactory
+
+AbstractBeanFactory <|-- AbstractAutowireCapableBeanFactory
+
+interface ListableBeanFactory
+/' 列表相关的, getCount getBeans '/
+
+BeanFactory <|-- ListableBeanFactory
+
+interface ConfigurableListableBeanFactory
+
+ListableBeanFactory <|-- ConfigurableListableBeanFactory
+
+class DefaultListableBeanFactory
+ConfigurableListableBeanFactory <|-- DefaultListableBeanFactory
+AbstractAutowireCapableBeanFactory <|-- DefaultListableBeanFactory
+@enduml

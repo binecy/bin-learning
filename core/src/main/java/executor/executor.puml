@@ -1,0 +1,48 @@
+@startuml
+
+/'abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}'/
+
+
+/' 执行提交的Runnable任务的对象。 execute '/
+interface Executor
+
+/' submit, shutdown '/
+interface ExecutorService
+
+Executor <|- ExecutorService
+
+abstract class AbstractExecutorService
+ExecutorService <|- AbstractExecutorService
+
+
+
+
+class ThreadPoolExecutor
+AbstractExecutorService <|-- ThreadPoolExecutor
+
+
+
+
+
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+
+/'abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}'/
+
+interface Future
+
+interface Runnable
+
+interface RunnableFuture
+Future <|--  RunnableFuture
+Runnable <|-- RunnableFuture
+
+class FutureTask
+
+RunnableFuture <|-- FutureTask
+
+interface Callable
+
+Callable *-- FutureTask
+
+
+
+
+
+
+
+
+@enduml
