@@ -7,14 +7,14 @@ public class MergeHandler extends ChannelOutboundHandlerAdapter {
 
     @Override
     public void read(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("outbound read");
+        System.out.println("fire outboundHandler read");
         ctx.read();
     }
 
 
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-        System.out.println("outbound write");
+        System.out.println("merge in outboundHandler write");
 
         String[] arr = (String[])msg;
         StringBuilder sb = new StringBuilder();
@@ -29,6 +29,5 @@ public class MergeHandler extends ChannelOutboundHandlerAdapter {
         ByteBuf byteBuf = ctx.alloc().buffer(bytes.length);
         byteBuf.writeBytes(bytes);
         ctx.write(byteBuf, promise);
-
     }
 }

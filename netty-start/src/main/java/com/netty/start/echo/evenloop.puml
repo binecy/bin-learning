@@ -1,33 +1,9 @@
 @startuml
 
-
-/'
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|-- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+interface EventLoopGroup {
+    + next():EventLoop
+    + register(Channel channel):ChannelFuture
 }
-
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
-'/
-
-
-interface EventLoopGroup
 interface EventLoop
 
 EventLoopGroup <|- EventLoop
@@ -44,19 +20,47 @@ interface EventExecutorGroup
 EventExecutorGroup <|-- EventLoopGroup
 
 
+
+
+
+
 interface ScheduledExecutorService
 ScheduledExecutorService <|-- EventExecutorGroup
 
 
-interface EventExecutor
+interface EventExecutor {
++ inEventLoop():boolean
+}
+
+
+abstract class SingleThreadEventExecutor
+
+EventExecutor <|- SingleThreadEventExecutor
+
+
 EventExecutor <|-- EventLoop
 
 
 
-
-interface EventExecutorGroup
+interface EventExecutorGroup {
+    + next():EventExecutor
+    + submit(Runnable task):Future
+}
 EventExecutorGroup <|- EventExecutor
 
-interface Executor
+interface Executor  {
+    + execute(Runnable command)
+}
 Executor <|- ThreadPerTaskExecutor
+
+interface ExecutorService {
+    + shutdown()
+}
+ExecutorService <|-- ScheduledExecutorService
+
+
+Executor <|-- ExecutorService
+
+
+SingleThreadEventExecutor <|-- SingleThreadEventLoop
 @enduml

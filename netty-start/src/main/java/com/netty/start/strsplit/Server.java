@@ -31,7 +31,7 @@ public class Server {
                             p.addLast(new MergeHandler());
 
                             p.addLast(new SplitHandler());
-                            p.addLast(new ResponseHandler());
+                            p.addLast(new LogicHandler());
 
                         }
                     });

@@ -31,18 +31,31 @@ ChannelHandler <|-- ChannelInboundHandler
 /'class ChannelInboundHandlerAdapter
 ChannelInboundHandler <|-- ChannelInboundHandlerAdapter'/
 
+interface ChannelOutboundHandler
+ChannelHandler <|-- ChannelOutboundHandler
 
 interface ChannelHandlerContext
-abstract class AbstractChannelHandlerContext
-ChannelHandlerContext <|-- AbstractChannelHandlerContext
+/'abstract class AbstractChannelHandlerContext
+ChannelHandlerContext <|-- AbstractChannelHandlerContext'/
 
 
 interface ChannelPipeline
 class DefaultChannelPipeline
-ChannelPipeline <|-- DefaultChannelPipeline
+ChannelPipeline <|- DefaultChannelPipeline
 
 class HeadContext
 HeadContext *-- DefaultChannelPipeline
-AbstractChannelHandlerContext <|- HeadContext
+/'AbstractChannelHandlerContext <|-- HeadContext'/
+
+ChannelHandlerContext <|-- HeadContext
 ChannelInboundHandler <|-- HeadContext
+ChannelOutboundHandler <|-- HeadContext
+
+interface ChannelInboundInvoker
+interface ChannelOutboundInvoker
+ChannelInboundInvoker <|-- ChannelHandlerContext
+ChannelOutboundInvoker <|-- ChannelHandlerContext
+
+ChannelInboundInvoker <|-- ChannelPipeline
+ChannelOutboundInvoker <|-- ChannelPipeline
 @enduml
