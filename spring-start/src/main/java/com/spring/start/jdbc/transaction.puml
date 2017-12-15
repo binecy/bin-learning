@@ -1,0 +1,41 @@
+@startuml
+
+/'abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}'/
+
+
+interface PlatformTransactionManager {
+    + getTransaction(TransactionDefinition definition):TransactionStatus
+    + commit(TransactionStatus status)
+    + void rollback(TransactionStatus status)
+}
+
+abstract class AbstractPlatformTransactionManager
+
+PlatformTransactionManager <|-- AbstractPlatformTransactionManager
+
+class DataSourceTransactionManager
+
+AbstractPlatformTransactionManager <|-- DataSourceTransactionManager
+
+@enduml
