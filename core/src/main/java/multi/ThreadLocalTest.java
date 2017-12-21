@@ -6,27 +6,26 @@ public class ThreadLocalTest {
         Thread t = Thread.currentThread();
 
         ThreadLocal<Object> local = new ThreadLocal<Object>() {
-            @Override
             protected void finalize() throws Throwable {
                 System.out.println(this.toString() + " threadLocal is gc");
             }
         };
 
         Object reference = new Object() {
-            @Override
             protected void finalize() throws Throwable {
-                System.out.println(this.toString() + " Object is gc");
+                System.out.println(this.toString() + " object is gc");
             }
         };
 
         local.set(reference);
 
-        local.get();
+//        local.get();
 
         // 去掉强引用
+        reference = null;
         local.set(null);
         local = null;
-        reference = null;
+
         System.gc();
 
         Thread.currentThread().sleep(1000);
