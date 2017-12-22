@@ -1,0 +1,33 @@
+@startuml
+
+interface BeanFactory {
++getBean(String name):Object
+}
+
+
+interface SingletonBeanRegistry {
++registerSingleton(String beanName,
+Object singletonObject)
+}
+
+abstract class AbstractBeanFactory
+
+
+BeanFactory <|-- AbstractBeanFactory
+SingletonBeanRegistry <|-- AbstractBeanFactory
+
+abstract class AbstractAutowireCapableBeanFactory
+AbstractBeanFactory <|-- AbstractAutowireCapableBeanFactory
+
+
+interface AutowireCapableBeanFactory {
+ +autowire(Class<?> beanClass, int autowireMode,
+ boolean dependencyCheck):Object
+}
+
+BeanFactory <|-- AutowireCapableBeanFactory
+
+
+abstract class AbstractAutowireCapableBeanFactory
+AutowireCapableBeanFactory <|-- AbstractAutowireCapableBeanFactory
+@enduml

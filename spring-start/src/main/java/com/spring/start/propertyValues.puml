@@ -1,0 +1,17 @@
+@startuml
+
+class PropertyValue {
+-name:String
+-value:Object
+}
+
+interface PropertyValues
+
+
+class MutablePropertyValues
+
+
+PropertyValues <|-- MutablePropertyValues
+PropertyValue *-- MutablePropertyValues
+
+@enduml
