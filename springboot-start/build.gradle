@@ -16,6 +16,7 @@ dependencies {
             "org.springframework.boot:spring-boot-starter-test",
             "org.springframework.boot:spring-boot-starter-jdbc",
             "org.springframework.boot:spring-boot-starter-redis:1.4.7.RELEASE",
+            "org.springframework.boot:spring-boot-starter-amqp",
             "mysql:mysql-connector-java:5.1.21"
     )
     
