@@ -1,7 +1,11 @@
 dependencies {
     compile(
             "com.alibaba:dubbo:2.5.7",
-            "com.github.sgroschupf:zkclient:0.1"
+            "javax.validation:validation-api:1.0.0.GA",
+            "org.hibernate:hibernate-validator:4.2.0.Final",
+            "com.github.sgroschupf:zkclient:0.1",
+            "org.springframework:spring-test:4.3.10.RELEASE"
+
 
     )
 }

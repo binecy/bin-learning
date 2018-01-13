@@ -1,0 +1,54 @@
+@startuml
+
+/'abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}'/
+
+
+interface BeanDefinitionReader {
++loadBeanDefinitions(Resource resource):int
+}
+
+abstract class AbstractBeanDefinitionReader
+
+
+BeanDefinitionReader <|-- AbstractBeanDefinitionReader
+
+
+class XmlBeanDefinitionReader
+
+AbstractBeanDefinitionReader <|-- XmlBeanDefinitionReader
+
+
+interface BeanDefinitionRegistry {
++registerBeanDefinition(String beanName,
+BeanDefinition beanDefinition)
+}
+
+
+class DefaultListableBeanFactory
+BeanDefinitionRegistry <|-- DefaultListableBeanFactory
+class XmlBeanFactory
+DefaultListableBeanFactory <|-- XmlBeanFactory
+
+XmlBeanDefinitionReader *-- XmlBeanFactory
+@enduml

@@ -18,6 +18,15 @@
     <!-- 定义接口实现类 -->
     <bean id="helloService" class="com.dubbo.start.service.HelloServiceImpl"></bean>
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.dubbo.start.service.HelloService" ref="helloService" timeout="6000"  protocol="dubbo"/>
+    <dubbo:service interface="com.dubbo.start.service.HelloService" ref="helloService" timeout="6000"  protocol="dubbo" validation="true"/>
 
+
+    <bean id="callbackService" class="com.dubbo.start.service.CallbackServiceImpl" />
+    <dubbo:service interface="com.dubbo.start.service.CallbackService" ref="callbackService" connections="1" callbacks="1000">
+        <dubbo:method name="addListener">
+            <dubbo:argument index="1" callback="true" />
+            <!--也可以通过指定类型的方式-->
+            <!--<dubbo:argument type="com.demo.CallbackListener" callback="true" />-->
+        </dubbo:method>
+    </dubbo:service>
 </beans>
