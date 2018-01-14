@@ -1,5 +1,5 @@
 include 'core','springboot-start','netty-start','mybatis-start','springboot-redis','springboot-mybatis',
         'springboot-kafka','springcloud-eureka','springcloud-ribbon','springcloud-eureka-server','springcloud-feign',
         'springcloud-zuul','springcloud-config','springcloud-config-service','kafka-start','spring-start',
-        'disconf-start','proxy-start','dubbo-start','dis-lock','httpclient-start','elklog-start'
+        'disconf-start','proxy-start','dubbo-start','dis-lock','httpclient-start','elklog-start','springmvc-start'
 
