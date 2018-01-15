@@ -22,12 +22,38 @@ public class ApplicationTests {
 
     @Test
     public void hello() throws Exception {
-        sender.send();
+        for(int i = 0; i < 30; i++) {
+            sender.send();
+            Thread.sleep(1000 * 3);
+        }
     }
 
     @Test
     public void hello2() throws Exception {
         sender.send2();
+
+        Thread.sleep(1000 * 1000);
+    }
+
+
+    @Test
+    public void testTopic() throws InterruptedException {
+        for(int i = 0; i < 10; i++) {
+            sender.sendToTopic();
+            Thread.sleep(1000);
+        }
+    }
+
+
+
+    @Test
+    public void receiver() throws InterruptedException {
+        Thread.sleep(1000 * 1000);
+    }
+
+    @Test
+    public void testFanout() {
+        sender.sentToFanout();
     }
 
 }

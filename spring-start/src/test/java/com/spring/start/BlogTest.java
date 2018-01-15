@@ -26,7 +26,7 @@ public class BlogTest {
     @Test
     public void test2() {
         ClassPathXmlApplicationContext beanFactory = new ClassPathXmlApplicationContext("application.xml");
-        Blog bean = (Blog)beanFactory.getBean("blog");
+        Blog bean = beanFactory.getBean("blog", Blog.class);
         Assert.assertEquals(bean.getTitle(), "hello spring");
     }
 

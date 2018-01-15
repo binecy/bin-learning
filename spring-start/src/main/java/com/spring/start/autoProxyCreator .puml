@@ -1,0 +1,30 @@
+@startuml
+
+
+interface BeanPostProcessor
+interface BeanFactoryAware
+abstract class AbstractAutoProxyCreator {
+#getAdvicesAndAdvisorsForBean(...):Object[]
+}
+
+BeanPostProcessor <|-- AbstractAutoProxyCreator
+BeanFactoryAware <|-- AbstractAutoProxyCreator
+
+abstract class AbstractAdvisorAutoProxyCreator {
+    #isEligibleAdvisorBean(String beanName):booelan
+}
+
+AbstractAutoProxyCreator <|--  AbstractAdvisorAutoProxyCreator
+
+class AspectJAwareAdvisorAutoProxyCreator
+
+AbstractAdvisorAutoProxyCreator <|-- AspectJAwareAdvisorAutoProxyCreator
+
+class AnnotationAwareAspectJAutoProxyCreator
+AspectJAwareAdvisorAutoProxyCreator <|-- AnnotationAwareAspectJAutoProxyCreator
+
+
+class InfrastructureAdvisorAutoProxyCreator
+
+AbstractAdvisorAutoProxyCreator <|-- InfrastructureAdvisorAutoProxyCreator
+@enduml

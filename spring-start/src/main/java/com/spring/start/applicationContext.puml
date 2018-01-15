@@ -1,0 +1,57 @@
+@startuml
+
+
+interface BeanFactory
+
+interface ApplicationContext
+
+BeanFactory <|-- ApplicationContext
+
+interface ConfigurableApplicationContext
+
+ApplicationContext <|-- ConfigurableApplicationContext
+
+abstract class AbstractApplicationContext
+
+ConfigurableApplicationContext <|-- AbstractApplicationContext
+
+abstract class AbstractRefreshableApplicationContext
+
+
+AbstractApplicationContext <|-- AbstractRefreshableApplicationContext
+
+abstract class AbstractRefreshableConfigApplicationContext
+
+AbstractRefreshableApplicationContext <|-- AbstractRefreshableConfigApplicationContext
+
+abstract class AbstractXmlApplicationContext
+
+AbstractRefreshableConfigApplicationContext <|-- AbstractXmlApplicationContext
+
+class ClassPathXmlApplicationContext
+
+AbstractXmlApplicationContext <|-- ClassPathXmlApplicationContext
+
+
+interface WebApplicationContext
+
+ApplicationContext <|-- WebApplicationContext
+interface ConfigurableWebApplicationContext
+
+WebApplicationContext <|-- ConfigurableWebApplicationContext
+
+abstract class AbstractRefreshableWebApplicationContext
+ConfigurableWebApplicationContext <|-- AbstractRefreshableWebApplicationContext
+ConfigurableApplicationContext <|-- ConfigurableWebApplicationContext
+class XmlWebApplicationContext
+
+AbstractRefreshableWebApplicationContext <|-- XmlWebApplicationContext
+class AnnotationConfigWebApplicationContext
+AbstractRefreshableWebApplicationContext <|-- AnnotationConfigWebApplicationContext
+
+
+class FileSystemXmlApplicationContext
+AbstractXmlApplicationContext <|-- FileSystemXmlApplicationContext
+
+
+@enduml
