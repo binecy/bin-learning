@@ -1,15 +1,14 @@
-package com.springboot.kafka;
+package com.springboot.start.kafka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Created by bin on 2017/2/28.
+ * Created by bin on 2017/2/26.
  */
 @SpringBootApplication
-public class Application {
+public class Main {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(Main.class, args);
     }
-
 }

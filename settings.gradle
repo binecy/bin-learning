@@ -1,4 +1,3 @@
-include 'core','springboot-start','netty-start','mybatis-start',
-        'springboot-kafka','kafka-start','spring-start',
+include 'core','springboot-start','netty-start','mybatis-start','kafka-start','spring-start',
         'disconf-start','proxy-start','dubbo-start','dis-lock','httpclient-start','elklog-start','springmvc-start'
 

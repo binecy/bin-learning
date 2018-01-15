@@ -1,4 +1,4 @@
-package com.springboot.kafka;
+package com.springboot.start.kafka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
