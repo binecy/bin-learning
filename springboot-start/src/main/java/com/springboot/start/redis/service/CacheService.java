@@ -1,4 +1,4 @@
-package com.springboot.start.redis;
+package com.springboot.start.redis.service;
 
 public interface CacheService {
 

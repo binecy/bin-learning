@@ -1,16 +1,18 @@
-package com.springboot.redis.domain;
+package com.springboot.start.redis.service;
 
 import java.io.Serializable;
 
 /**
  * Created by bin on 2017/2/28.
  */
-public class User  implements Serializable {
+public class User implements Serializable {
     private static final long serialVersionUID = -1L;
+    private Long id;
     private String username;
     private Integer age;
 
-    public User(String username, Integer age) {
+    public User(Long id, String username, Integer age) {
+        this.id = id;
         this.username = username;
         this.age = age;
     }
@@ -33,5 +35,22 @@ public class User  implements Serializable {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

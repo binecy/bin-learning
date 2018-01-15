@@ -1,4 +1,4 @@
-package com.springboot.redis;
+package com.springboot.start.redis;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.serializer.support.DeserializingConverter;
