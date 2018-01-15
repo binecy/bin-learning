@@ -1,4 +1,4 @@
-package com.springboot.start;
+package com.springboot.start.rest.controller;
 
 /**
  * Created by bin on 2017/2/26.

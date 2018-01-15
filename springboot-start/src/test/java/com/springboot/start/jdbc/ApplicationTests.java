@@ -1,7 +1,8 @@
 package com.springboot.start.jdbc;
 
 
-import com.springboot.start.User;
+import com.springboot.start.jdbc.service.User;
+import com.springboot.start.jdbc.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package com.springboot.start.rest.controller;
 
 import org.springframework.web.bind.annotation.*;
-import com.springboot.start.User;
 
 import java.util.*;
 

@@ -1,7 +1,7 @@
-package com.springboot.mybatis.domain;
+package com.springboot.start.jdbc.service;
 
 /**
- * Created by bin on 2017/2/28.
+ * Created by bin on 2017/2/26.
  */
 public class User {
     private Long id;

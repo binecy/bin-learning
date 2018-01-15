@@ -1,6 +1,5 @@
-package com.springboot.start.jdbc;
+package com.springboot.start.jdbc.service;
 
-import com.springboot.start.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
