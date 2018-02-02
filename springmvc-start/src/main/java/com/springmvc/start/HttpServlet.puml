@@ -1,0 +1,20 @@
+@startuml
+
+
+abstract class HttpServlet
+
+
+abstract class HttpServletBean
+
+
+HttpServlet <|--  HttpServletBean
+
+abstract class FrameworkServlet
+
+HttpServletBean <|-- FrameworkServlet
+
+class DispatcherServlet
+
+FrameworkServlet <|-- DispatcherServlet
+
+@enduml

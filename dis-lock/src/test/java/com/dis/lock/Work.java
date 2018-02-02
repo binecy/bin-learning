@@ -25,6 +25,7 @@ public class Work implements Runnable{
                     lock.unLock();
 
                     System.out.println(name + " unlock success");
+                    System.out.printf("\n\n");
                 }
             } else {
                 System.out.println("lock fail");

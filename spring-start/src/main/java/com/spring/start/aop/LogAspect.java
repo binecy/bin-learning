@@ -4,11 +4,17 @@ package com.spring.start.aop;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
 public class LogAspect {
 
-	@Around("execution(public * com.spring.start..*.*.*(..))")
+	@Pointcut("execution(public * com.spring.start..*.*.*(..))")
+	public void point() {
+
+	}
+
+	@Around("point()")
 	public Object methodAroundLog(ProceedingJoinPoint joinPoint) throws Throwable {
 		System.out.println("start...");
 		Object result = joinPoint.proceed(joinPoint.getArgs());

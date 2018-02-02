@@ -24,7 +24,7 @@ public class UserDao {
     }
 
 
-    @Transactional
+    @Transactional(timeout = 30)
     public void insert2(User user) {
         //2  创建模板
         JdbcTemplate jdbcTemplate = new JdbcTemplate();

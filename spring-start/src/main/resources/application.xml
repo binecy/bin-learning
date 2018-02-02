@@ -9,7 +9,8 @@
 	                    http://www.springframework.org/schema/aop
                         http://www.springframework.org/schema/aop/spring-aop.xsd
 	                    ">
-    <!--<aop:aspectj-autoproxy/>-->
+    <aop:aspectj-autoproxy/>
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
 
     <!-- 定义切面 -->
     <bean id="logAspect" class="com.spring.start.aop.LogAspect"></bean>
@@ -17,6 +18,6 @@
     <bean id="blog" class="com.spring.start.bean.Blog" >
         <property name="title" value="hello spring"></property>
     </bean>
-    <bean id="myBeanFactoryPostProcessor" class="com.spring.start.MyBeanFactoryPostProcessor"></bean>
+    <!--<bean id="myBeanFactoryPostProcessor" class="com.spring.start.MyBeanFactoryPostProcessor"></bean>-->
 
 </beans>

@@ -10,7 +10,9 @@ buildscript {
 dependencies {
     compile(
             "org.redisson:redisson:3.5.4",
-            "org.apache.zookeeper:zookeeper:3.4.10"
+            "org.apache.zookeeper:zookeeper:3.4.10",
+            "org.apache.curator:curator-framework:2.12.0",
+            "org.apache.curator:curator-recipes:2.12.0"
     )
     
 }

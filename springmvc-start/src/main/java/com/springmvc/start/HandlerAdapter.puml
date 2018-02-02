@@ -1,0 +1,17 @@
+@startuml
+
+interface HandlerAdapter{
++handle(HttpServletRequest request, HttpServletResponse response,
+Object handler) :ModelAndView
+}
+
+abstract class AbstractHandlerMethodAdapter
+HandlerAdapter <|-- AbstractHandlerMethodAdapter
+
+class RequestMappingHandlerAdapter
+
+AbstractHandlerMethodAdapter <|-- RequestMappingHandlerAdapter
+
+
+
+@enduml

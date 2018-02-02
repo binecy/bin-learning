@@ -1,0 +1,20 @@
+@startuml
+
+interface HandlerMapping
+
+
+
+abstract class AbstractHandlerMapping
+
+HandlerMapping <|-- AbstractHandlerMapping
+
+class RequestMappingHandlerMapping
+
+AbstractHandlerMapping <|-- RequestMappingHandlerMapping
+
+interface MatchableHandlerMapping
+
+HandlerMapping <|-- MatchableHandlerMapping
+MatchableHandlerMapping <|-- RequestMappingHandlerMapping
+
+@enduml

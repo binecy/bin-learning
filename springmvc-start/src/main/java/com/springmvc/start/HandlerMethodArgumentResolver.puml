@@ -1,0 +1,41 @@
+@startuml
+
+interface HandlerMethodArgumentResolver {
+    +supportsParameter(MethodParameter parameter):boolean
+    +resolveArgument(...):Object
+}
+
+abstract class AbstractNamedValueMethodArgumentResolver
+
+HandlerMethodArgumentResolver <|-- AbstractNamedValueMethodArgumentResolver
+
+class RequestParamMethodArgumentResolver
+
+    AbstractNamedValueMethodArgumentResolver <|-- RequestParamMethodArgumentResolver
+
+
+class PathVariableMethodArgumentResolver
+
+AbstractNamedValueMethodArgumentResolver <|-- PathVariableMethodArgumentResolver
+
+abstract class AbstractMessageConverterMethodArgumentResolver
+
+HandlerMethodArgumentResolver <|-- AbstractMessageConverterMethodArgumentResolver
+
+
+abstract class AbstractMessageConverterMethodProcessor
+
+AbstractMessageConverterMethodArgumentResolver <|-- AbstractMessageConverterMethodProcessor
+
+class RequestResponseBodyMethodProcessor
+
+
+AbstractMessageConverterMethodProcessor <|-- RequestResponseBodyMethodProcessor
+
+
+interface HandlerMethodReturnValueHandler {
+    +handleReturnValue(...)
+}
+
+HandlerMethodReturnValueHandler <|-- AbstractMessageConverterMethodProcessor
+@enduml

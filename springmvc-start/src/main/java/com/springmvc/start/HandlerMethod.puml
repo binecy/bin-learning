@@ -1,0 +1,14 @@
+@startuml
+
+class HandlerMethod
+
+class InvocableHandlerMethod
+
+HandlerMethod <|-- InvocableHandlerMethod
+
+class ServletInvocableHandlerMethod
+
+InvocableHandlerMethod <|-- ServletInvocableHandlerMethod
+
+
+@enduml

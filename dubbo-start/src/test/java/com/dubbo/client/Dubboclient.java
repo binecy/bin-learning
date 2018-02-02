@@ -21,9 +21,9 @@ public class Dubboclient {
 
     @Autowired
     private HelloService helloService;
-
-    @Autowired
-    private CallbackService callbackService;
+//
+//    @Autowired
+//    private CallbackService callbackService;
 
 
     @Test
@@ -31,7 +31,7 @@ public class Dubboclient {
         helloService.hello("binecy");
     }
 
-    @Test
+   /* @Test
     public void testEcho() {
         EchoService echoService = (EchoService) helloService; // 强制转型为EchoService
         Assert.assertEquals(echoService.$echo("ok"), "ok");
@@ -56,5 +56,5 @@ public class Dubboclient {
 
         Thread.currentThread().sleep(1000 * 30);
 
-    }
+    }*/
 }

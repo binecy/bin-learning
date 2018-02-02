@@ -10,8 +10,12 @@
     <!-- 服务消费者应用名称，不要与提供者应用名称一致 -->
     <dubbo:application name="base-client" />
 
+    <dubbo:consumer client="netty4" />
+
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry address="zookeeper://aws.binecy.com:2181" />
+
+    <!--<dubbo:consumer  />-->
 
     <!-- 生成远程服务代理，可以和本地bean一样使用HelloService -->
     <!-- cache="lru" -->
@@ -20,5 +24,5 @@
         <dubbo:method name="hello" retries="3"></dubbo:method>
     </dubbo:reference>
 
-    <dubbo:reference id="callbackService" interface="com.dubbo.start.service.CallbackService" />
+    <!--<dubbo:reference id="callbackService" interface="com.dubbo.start.service.CallbackService" />-->
 </beans>

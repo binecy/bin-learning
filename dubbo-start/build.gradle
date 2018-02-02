@@ -1,11 +1,20 @@
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+}
+
+
 dependencies {
     compile(
-            "com.alibaba:dubbo:2.5.7",
+            "com.alibaba:dubbo:2.6.0",
             "javax.validation:validation-api:1.0.0.GA",
             "org.hibernate:hibernate-validator:4.2.0.Final",
             "com.github.sgroschupf:zkclient:0.1",
-            "org.springframework:spring-test:4.3.10.RELEASE"
-
-
+            "org.springframework:spring-test:4.3.10.RELEASE",
+            "io.netty:netty-all:4.1.6.Final"
     )
 }

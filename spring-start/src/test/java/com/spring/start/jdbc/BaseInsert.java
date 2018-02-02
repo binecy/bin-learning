@@ -23,7 +23,7 @@ public class BaseInsert {
         jdbcTemplate.setDataSource(dataSource);
 
         //3 通过api操作
-        jdbcTemplate.update("insert into t_user(username,password) values(?,?);", "binecy","0891");
+        jdbcTemplate.update("insert into t_user(username,password) values(?,?);", "binecy","hahaha");
     }
 
 }

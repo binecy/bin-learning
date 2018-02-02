@@ -21,6 +21,7 @@ public class FileTest {
     public void testPath() throws URISyntaxException {
         // 获取local.properties文件
         URI localProUri = this.getClass().getClassLoader().getResource("local.properties").toURI();
+        System.out.println(localProUri);
 //        System.out.println(localProUri);
         // 转换为Path对象, 指向 .../resources/test/local.properties
         Path localProPath = Paths.get(localProUri);
