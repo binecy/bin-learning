@@ -10,23 +10,22 @@
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="base-service"  />
     <!-- 用dubbo协议在29115端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="29115" server="netty4" />
+    <dubbo:protocol name="dubbo" port="29116" server="netty4" />
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry address="zookeeper://aws.binecy.com:2181" />
 
-    <!-- 定义接口实现类 -->
-    <bean id="helloService" class="com.dubbo.start.service.HelloServiceImpl"></bean>
+
+
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.dubbo.start.service.HelloService" ref="helloService" timeout="6000"  protocol="dubbo" validation="true"/>
+    <dubbo:service id="com.dubbo.start.service.HelloService" interface="com.dubbo.start.service.HelloService" class="com.dubbo.start.service.HelloServiceImpl" timeout="6000"  protocol="dubbo" validation="true"/>
 
+    <bean class="ddd.SpringApplicationContext"/>
 
-    <!--<bean id="callbackService" class="com.dubbo.start.service.CallbackServiceImpl" />
-    <dubbo:service interface="com.dubbo.start.service.CallbackService" ref="callbackService" connections="1" callbacks="1000">
+    <dubbo:service interface="com.dubbo.start.service.CallbackService" class="com.dubbo.start.service.CallbackServiceImpl" connections="1" callbacks="1000">
         <dubbo:method name="addListener">
             <dubbo:argument index="1" callback="true" />
-            &lt;!&ndash;也可以通过指定类型的方式&ndash;&gt;
-            &lt;!&ndash;<dubbo:argument type="com.demo.CallbackListener" callback="true" />&ndash;&gt;
+
         </dubbo:method>
-    </dubbo:service>-->
+    </dubbo:service>
 </beans>

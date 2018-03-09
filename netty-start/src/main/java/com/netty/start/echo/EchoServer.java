@@ -37,7 +37,7 @@ public class EchoServer {
                     });
 
             // Start the server.
-            ChannelFuture f = b.bind(PORT).sync();
+            ChannelFuture f = b.bind(PORT).syncUninterruptibly();
 
             // Wait until the server socket is closed.
             f.channel().closeFuture().sync();

@@ -13,7 +13,7 @@ import java.util.Properties;
 public class BasicConsumer {
     public void get() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "aws.binecy.com:9092");
+        props.put("bootstrap.servers", "127.0.0.1:9092");
         props.put("group.id", "test");      // 配置用户group
         props.put("enable.auto.commit", "false");    // 是否自动提交消费者offset
         props.put("auto.commit.interval.ms", "1000");   //用户offset自动提交的频率
@@ -21,6 +21,7 @@ public class BasicConsumer {
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
+
 
         consumer.subscribe(Arrays.asList("test"));
         while (true) {

@@ -13,7 +13,7 @@ public class BasicProducer {
 
     private void send(){
         Properties props = new Properties();
-        props.put("bootstrap.servers", "aws.binecy.com:9092");
+        props.put("bootstrap.servers", "127.0.0.1:9092");
         // Producer接受broker ack的模式
         // 0: 如果设置为零，则生产者不会等待来自服务器的任何确认。
         // 1: leader接收成功并写入本地日志就返回ack   如果leader在接收记录之后但在追随者复制之前立即崩溃，那么记录将会丢失。
@@ -39,7 +39,7 @@ public class BasicProducer {
         Producer<String, String> producer = new KafkaProducer<String, String>(props);
 
         for(int i = 0; i < 5; i++)
-            producer.send(new ProducerRecord<>("test", "from java : " + i ));
+            producer.send(new ProducerRecord<>("test", String.valueOf(i) , "hello, kafka : " + i ));
 
 
         producer.close();
